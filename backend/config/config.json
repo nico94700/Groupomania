@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": "nico94",
+    "database": "database_groupomania",
+    "host": "localhost",
+    "dialect": "mysql",
+    "timezone": "SYSTEM"
+  },
+  "test": {
+    "username": "root",
+    "password": "nico94",
+    "database": "database_groupomania",
+    "host": "localhost",
+    "dialect": "mysql",
+    "timezone": "SYSTEM"
+  },
+  "production": {
+    "username": "root",
+    "password": "nico94",
+    "database": "database_groupomania",
+    "host": "localhost",
+    "dialect": "mysql",
+    "timezone": "SYSTEM"
+  }
+}
