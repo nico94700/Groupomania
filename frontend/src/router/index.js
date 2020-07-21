@@ -5,6 +5,11 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/Wall',
+    name: 'Wall',
+    component: () => import('../views/Wall.vue')
+  },
+  {
     path: '/signup',
     name: 'Signup',
     component: () => import('../views/Signup.vue')
@@ -19,11 +24,7 @@ const routes = [
     name: 'User',
     component: () => import('../views/User.vue')
   },
-  {
-    path: '/Wall',
-    name: 'Wall',
-    component: () => import('../views/Wall.vue')
-  }
+
 ]
 
 const router = new VueRouter({
