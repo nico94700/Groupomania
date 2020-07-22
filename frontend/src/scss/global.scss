@@ -4,13 +4,61 @@ $gris: #797676;
 
 
 .card{
-  border: rgb(24, 10, 95) 1px solid !important;
+   font-family: IBMPlexSans,sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 32px;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    background: #0079d3;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: unset;
+    height: 35px;
+    width: 155px;
+    min-width: 155px;
+    background-color: #fff;
+    color: #0079d3;
+    border: 1px solid #0079d3;
+    display: block;
+    height: auto;
+    margin: 8px 0;
+    padding: 12px 28px;
+    width: 100%;
 }
 .text{
   color: #fd2d01;
 }
 .card-header{
-  background-color: rgba(167, 162, 162, 0.658);
+  font-family: IBMPlexSans,sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 32px;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    background: #0079d3;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: unset;
+    height: 35px;
+    width: 155px;
+    min-width: 155px;
+    background-color: #fff;
+    color: #0079d3;
+    border: 1px solid #0079d3;
+    display: block;
+    height: auto;
+    margin: 8px 0;
+    padding: 12px 28px;
+    width: 100%;
 }
 
 .main {
@@ -65,14 +113,43 @@ $gris: #797676;
   background-color: white;
   width: 75%;
   margin: auto;
-  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
-  border-radius: 0.25rem;
+  box-shadow: 0px 3px 10px 0px transparent;
+  border-radius: 1.25rem;
   padding: 0.5rem;
   margin-bottom: 1rem;
   & h3 {
     color: DF5656;
     margin: 0.25rem 0;
     font-size: 0.75rem;
+  }
+
+  input{
+
+       color: blue;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 32px;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    background: #0079d3;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: unset;
+    height: 35px;
+    width: 155px;
+    min-width: 155px;
+    background-color: #fff;
+    color: #0079d3;
+    
+    display: block;
+    height: auto;
+    margin: 8px 0;
+    padding: 12px 28px;
+    width: 100%;
   }
   & .like-section {
     & div {

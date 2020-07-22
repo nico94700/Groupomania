@@ -1,17 +1,10 @@
 <template>
-  <div
-    class="modal fade"
-    id="modalEditPost"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="ModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="modalEditPost"  tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" >
     <div class="modal-dialog">
-      <!--Modification est demandée-->
-      <div class="modal-content" v-if="editOption=='modify'">
+      <!--Modal pour la modification du post-->
+      <div class="modal-content" v-if="editOption =='modify'">
         <div class="modal-header">
-          <h5 class="modal-title" id="ModalLabel">Modifier le post</h5>
+          <h5 class="modal-title" id="ModalLabel">Voulez-vous modifier votre publication ?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -26,43 +19,46 @@
             <div class="input-group mb-3" v-if="post.attachement">
               <br />
               <img class="img-thumbnail" :src="post.attachement" />
-              <button type="button" class="btn btn-danger mx-auto mt-1" @click='deleteImgAction'>Supprimer</button>
+              <button type="button" class="btn btn-danger" @click='deleteImgAction'>Supprimer l'image </button>
             </div>
+            
 
             <span id="msgReturnAPI" class="mx-3"></span>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-primary" @click="updatePost">Sauvegarder les changements</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-secondary" @click="updatePost">Sauvegarder les changements</button>
         </div>
       </div>
 
-      <!--Une suppression est demandée-->
+      <!-- Une Modal apparait lorsque le bouton supprimé est cliqué -->
       <div class="modal-content" v-else>
         <div class="modal-header">
-          <h5 class="modal-title" id="ModalLabel">Supprimer ce post (id: {{post.id}})</h5>
+          <h5 class="modal-title" id="ModalLabel">Supprimer ce post ? <span class="id">(id: {{post.id}})</span></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p>Etes vous sûr de vouloir supprimer ce post</p>
+          <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-danger" @click="deletePost">Supprimer le post</button>
+          <button type="button" class="btn btn-danger" @click="deletePost">Supprimer</button>
         </div>
       </div>
+      <!-- FIN DE LA MODALE-->
     </div>
   </div>
 </template>
 
 <script>
+// import d'axios pour les requêtes et de la bibliothèque vuex
 import { mapState } from "vuex";
 import axios from "axios";
 export default {
-  name: "modalBoxModerate",
+  name: "modalAlerte",
   data() {
     return {
       deleteImg: false
@@ -78,8 +74,10 @@ export default {
     }
   },
   methods: {
+    // Fonction pour supprimer un post
     deletePost() {
       axios
+      // requête delete grâce au token de l'user...
         .delete("http://localhost:3000/api/post/delete", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token")
@@ -88,23 +86,24 @@ export default {
             postId: this.post.id,
             userIdOrder: this.user.userId
           }
-        })
+        }) // Si oui on supprime...
         .then(() => {
           window.location.reload();
-        })
+        }) // ...Si non on envoi une erreur
         .catch(error => console.log(error));
     },
+// Fonction pour modifier un post
     updatePost() {
       let newInput = document.getElementById("inputNewText").value;
-      //Verification si changements existent
+      //On verifie si changements existent ...
       let newContent = false;
       if (newInput !== this.post.content || this.deleteImg != false) {
         newContent = true;
       }
-      //Modificiation si changements existent
+      //...Si oui on effectue ses changements
       if (newContent && this.deleteImg) {
         axios
-          .put(
+          .put( //requête put pour modifier le post existant avec la suppression de l'image
             "http://localhost:3000/api/post/update",
             {
               postId: this.post.id,
@@ -117,20 +116,19 @@ export default {
                 authorization: "Bearer " + localStorage.getItem("token")
               }
             }
-          )
+          ) // Si requête positive alors on repond avec la modif...
           .then(response => {
             console.log("reponse API", response);
             this.retourAPI = response.data.confirmation;
-            setTimeout(() => {
               this.retourAPI = "";
-              // window.location.reload();
-            }, 2000);
-          })
+              window.location.reload();
+          }) //... Sinon on renvoi une erreur
           .catch(err => {
             console.log("admin", err);
             this.retourAPI = "Une erreur est survenue, vérifier vos saisies";
           })
       } else if(newContent){
+        // Requête avec juste modification du texte
         axios
           .put(
             "http://localhost:3000/api/post/update",
@@ -145,28 +143,29 @@ export default {
               }
             }
           )
+          // Si requête positive alors on repond avec la modif...
           .then(response => {
             console.log("reponse API", response);
             this.retourAPI = response.data.confirmation;
             setTimeout(() => {
               this.retourAPI = "";
-              // window.location.reload();
+               window.location.reload();
             }, 2000);
           })
+           //... Sinon on renvoi une erreur
           .catch(err => {
             console.log("admin", err);
             this.retourAPI = "Une erreur est survenue, vérifier vos saisies";
           })}
           else{
+            // on affiche un message qu'il n'y a pas de changement
         console.log("aucun changement");
       }
     },
+    // Fonction pour supprimer l'image partagé
     deleteImgAction() {
       this.deleteImg = true;
     }
   }
 };
 </script>
-
-<style>
-</style>

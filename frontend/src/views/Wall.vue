@@ -11,6 +11,7 @@ import axios from "axios";
 import CreatePost from "../components/CreatePost";
 import Post from "../components/Post";
 import modalBoxModerate from "../components/ModifPost";
+import { mapState } from "vuex";
 export default {
   name: "Mur",
   components: {
@@ -38,13 +39,20 @@ export default {
       this.post = payload.post;
     }
   },
+  computed: {
+    ...mapState(["user", "editOption"])
+  },
+  
+
   mounted() {
+
     axios
       .get("http://localhost:3000/api/post", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
       })
+      
       //.get("http://localhost:3000/api/post",this.$store.state.headerParams)
       .then(response => {
         console.log("post", response.data);

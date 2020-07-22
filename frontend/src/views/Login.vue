@@ -77,13 +77,57 @@ export default {
 
 <style scope>
 .cadre{
-  padding: 1%;
-  border: grey 3px solid !important;
-  border-radius: 20px;
-  background-color: white;
+  font-family: IBMPlexSans,sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 32px;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    background: #0079d3;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: unset;
+    height: 35px;
+    width: 155px;
+    min-width: 155px;
+    background-color: #fff;
+    color: #0079d3;
+    border: 1px solid #0079d3;
+    display: block;
+    height: auto;
+    margin: 8px 0;
+    padding: 12px 28px;
+    width: 100%;
 }
 .btn{
-  background-color: rgb(33, 33, 129) !important;
+       font-family: IBMPlexSans,sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 32px;
+    color: #fff;
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    background: #0079d3;
+    text-transform: uppercase;
+    cursor: pointer;
+    line-height: unset;
+    height: 35px;
+    width: 155px;
+    background-color: #fff;
+    color: #0079d3;
+    border: 1px solid #0079d3;
+    display: block;
+    height: auto;
+    margin: 8px 0;
+    padding: 12px 28px;
+    width: 97%;
 }
 .main{
   margin-top: 16%;
