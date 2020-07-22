@@ -49,7 +49,7 @@
                       <small
                         id="emailHelp"
                         class="form-text text-muted"
-                      >Au minimum 6 caractères dont une majuscule, un minuscule et un chiffre</small>
+                      >Au minimum 8 caractères dont une majuscule, un minuscule et un chiffre</small>
                     </div>
                     <div class="form-group">
                       <label for="RepeatInputNewPassword">Je confirme mon nouveau mot de passe</label>
