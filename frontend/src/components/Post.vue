@@ -1,7 +1,7 @@
 <template>
   <div class="card mb-4 w-75 mx-auto">
     <div class="card-header d-flex justify-content-between">
-      <div> ~ Posté par : <strong class="text">{{post.User.username}}</strong>  <strong class="text">{{post.createdAt}}</strong> </div>
+      <div> Posté par : <strong class="text">{{post.User.username}}</strong>  <strong class="text">{{post.createdAt}}</strong> </div>
       <div class="dropdown" v-if="user.isAdmin==true || user.username == post.User.username">
         <svg class="bi bi-three-dots dropdown-toggle" id="dropdownMenuPost"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
           width="1.2em" height="1.2em" viewBox="0 0 15 15" fill="currentColor">
