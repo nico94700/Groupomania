@@ -23,7 +23,7 @@
           <div class="user-info__block">
             <p class="user-info__block__title title mb-0">Mot de passe</p>
             <small class="user-info__block__output">
-              Doit contenir au minimum 6 caractères dont une majuscule, une miniscule et un chiffre </small>
+              Doit contenir au minimum 8 caractères dont une majuscule, une miniscule et un chiffre </small>
           </div>
           <button type="button" class="btn btn-secondary mr-5" data-toggle="modal" data-target="#BoxModalChgPwd" @click="testInputs">Modifier mes informations ⚒</button>
           <!--Box Modal-->
