@@ -90,3 +90,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.input-text {
+  width: 100%;
+}
+</style>

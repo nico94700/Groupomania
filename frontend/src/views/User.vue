@@ -187,29 +187,5 @@ export default {
 };
 </script>
 
-<style scope>
-.main-connect{
-  margin-top: 10%;
-  background-color: rgba(185, 184, 184, 0.801);
-  border: 2px;
-  border-style: double;
-  border-color: #fd2d01;
-}
-h1{
-  color: #fd2d01;
-  font-family: fantasy;
-  margin-top: 2%;
-  text-align: center;
-}
-hr{
-  border-width: 3px;
-  border-color:#fd2d01;
-  width: 75%;
-}
-.title{
-  font-weight: bold;
-}
-small{
- font-size: 0.9em;
-}
+<style lang="scss">
 </style>
