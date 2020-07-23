@@ -36,17 +36,12 @@ export default {
   computed: {
     ...mapState(["user"])
   },
-  methods: {
+   methods: {
     disconnect() {
-      // Pour se déconnecter, On vide le localStorage, on actualise la page et on redirige vers la page login
       localStorage.clear();
-      setTimeout(() => {
-      this.$router.push({ path: '/login' })
-        window.location.reload();
-         }, 500);
-           
-          }
+      location.replace(location.origin);
     }
+  }
 };
 </script>
 

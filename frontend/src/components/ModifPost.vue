@@ -26,22 +26,22 @@
             <div class="input-group mb-3" v-if="post.attachement">
               <br />
               <img class="img-thumbnail" :src="post.attachement" />
-              <button type="button" class="btn btn-danger mx-auto mt-1" @click='deleteImgAction'>Supprimer l'image</button>
+              <button type="button" class="btn btn-danger" @click='deleteImgAction'>Supprimer l'image</button>
             </div>
 
             <span id="msgReturnAPI" class="mx-3"></span>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-          <button type="button" class="btn btn-primary" @click="updatePost">Sauvegarder les modifications</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+          <button type="button" class="btn btn-secondary" @click="updatePost">Sauvegarder les modifications</button>
         </div>
       </div>
 
       <!--Une suppression est demandée-->
       <div class="modal-content" v-else>
         <div class="modal-header">
-          <h5 class="modal-title" id="ModalLabel">Supprimer ce post (id: {{post.id}})</h5>
+          <h5 class="modal-title" id="ModalLabel">Supprimer ce post  <span class="id">(id: {{post.id}})</span></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -61,8 +61,9 @@
 <script>
 import { mapState } from "vuex";
 import axios from "axios";
+
 export default {
-  name: "modalBoxModerate",
+  name: "modalAlerte",
   data() {
     return {
       deleteImg: false
@@ -121,10 +122,8 @@ export default {
           .then(response => {
             console.log("reponse API", response);
             this.retourAPI = response.data.confirmation;
-            setTimeout(() => {
               this.retourAPI = "";
-              // window.location.reload();
-            }, 2000);
+               window.location.reload();
           })
           .catch(err => {
             console.log("admin", err);
@@ -150,8 +149,8 @@ export default {
             this.retourAPI = response.data.confirmation;
             setTimeout(() => {
               this.retourAPI = "";
-              // window.location.reload();
-            }, 2000);
+               window.location.reload();
+            })
           })
           .catch(err => {
             console.log("admin", err);

@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/Wall',
+    path: '/wall',
     name: 'Wall',
     component: () => import('../views/Wall.vue')
   },
