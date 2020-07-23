@@ -53,14 +53,7 @@ export default {
       .catch(error => {
         console.log(error); //affiche pas le message 'normalement' envoyé par le back
       }),
-      /*axios.get("http://localhost:3000/api/posts/comments")
-                .then(response => {
-                    this.nbCom=response.data;
-                    console.log(this.nbCom);
-                })
-                .catch(error => {
-                console.log(error);
-                });*/
+      
       this.$store.dispatch("getUserInfos");
   }
 };
