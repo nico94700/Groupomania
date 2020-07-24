@@ -5,7 +5,6 @@ let models = require('../models');
 let utils = require('../utils/jwtUtils');
 let verifInput = require('../utils/verifInput')
 
-
 //Création d'un user
 exports.signup = (req, res) => {
     // Valider les paramètres de la requète
@@ -17,7 +16,7 @@ exports.signup = (req, res) => {
         res.status(400).json({ error: 'il manque un paramètre' })
     }
 
-    // On fait la Vérification des saisies des inputs de l'user
+    //TO DO => Vérification des saisies user
     let emailOk = verifInput.validEmail(email);
     console.log(emailOk)
     let mdpOK = verifInput.validPassword(password);
@@ -26,6 +25,7 @@ exports.signup = (req, res) => {
     console.log(usernameOk)
     if (emailOk == true && mdpOK == true && usernameOk == true) {
         //Vérification si user n'existe pas déjà
+        //TO DO => Vérifier l'username et l'email
         models.User.findOne({
             attributes: ['email'],
             where: { email: email }
@@ -47,26 +47,26 @@ exports.signup = (req, res) => {
                     })
                 }
                 else {
-                    res.status(409).json({ error: 'Cette utilisateur existe déjà' })
+                    res.status(409).json({ error: 'Cette utilisateur existe déjà ' })
                 }
             })
             .catch(err => { res.status(500).json({ err }) })
     } else {
-        console.log('oups une erreur est survenue')
+        console.log('pas cette fois')
     }
 };
 
 //Login d'un user
 exports.login = (req, res) => {
     //Récupération et validation des paramètres
-    let email = req.body.email;
+    let username = req.body.username;
     let password = req.body.password;
-    if (email == null || password == null) {
+    if (username == null || password == null) {
         res.status(400).json({ error: 'Il manque un paramètre' })
     }
-    //Vérification si l'user existe
+    //Vérification si user existe
     models.User.findOne({
-        where: { email: email }
+        where: { username: username }
     })
         .then(user => {
             if (user) {
@@ -101,7 +101,7 @@ exports.userProfil = (req, res) => {
 
 //modification d'un profil
 exports.changePwd = (req, res) => {
-    
+    //TO DO:
     //Récupère l'id de l'user et le nouveau password
     let userId = utils.getUserId(req.headers.authorization);
     const newPassword = req.body.newPassword;

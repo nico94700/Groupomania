@@ -1,37 +1,58 @@
 <template>
-  <main class="main-connect">
-        <h1> Paramètres de mon compte </h1>
+  <main class="main">
+    <div class="row p-2">
+      <div class="col-12">
+        <h1>
+          <i class="fas fa-cog"></i>Paramètres du compte
+        </h1>
         <hr />
-    <section class="row user-info ml-5 pl-5 pr-5">
+      </div>
+    </div>
+    <section class="row user-info pl-5 pr-5">
       <div class="col-12">
         <h2>
-          <u>Vos informations personnelles</u>
+          <u>Informations de l'utilisateur</u>
         </h2>
-        <div class="user-info__block ">
-          <p class="user-info__block__title title mb-0 mt-3">Email</p>
+        <div class="user-info__block">
+          <p class="user-info__block__title mb-0">Email</p>
           <p class="user-info__block__output">
             <small>{{user.email}}</small>
           </p>
         </div>
         <div class="user-info__block">
-          <p class="user-info__block__title title mb-0">Nom d'utilisateur</p>
+          <p class="user-info__block__title mb-0">Username</p>
           <p class="user-info__block__output">
             <small>{{user.username}}</small>
           </p>
         </div>
         <div class="user-info__block d-sm-flex justify-content-between user-info__block--flex">
           <div class="user-info__block">
-            <p class="user-info__block__title title mb-0">Mot de passe</p>
+            <p class="user-info__block__title mb-0">Password</p>
             <small class="user-info__block__output">
-              Doit contenir au minimum 6 caractères dont une majuscule, une miniscule et un chiffre </small>
+              Doit contenir au minimum 8 caractères dont une majuscule,
+              et au minimum un caractère numérique et un caractère spécial
+            </small>
           </div>
-          <button type="button" class="btn btn-secondary mr-5" data-toggle="modal" data-target="#BoxModalChgPwd" @click="testInputs">Modifier mes informations ⚒</button>
-          <!--Box Modal-->
-          <div class="modal fade" id="BoxModalChgPwd" tabindex="-1" role="dialog" aria-labelledby="BoxModalChgPwd__title" aria-hidden="true">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#BoxModalChgPwd"
+            @click="testInputs"
+          >Change</button>
+          <!--Box Modal pour changement PWD-->
+          <div
+            class="modal fade"
+            id="BoxModalChgPwd"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="BoxModalChgPwd__title"
+            aria-hidden="true"
+          >
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="BoxModalChgPwd__title">Modifer mon mot de passe </h5>
+                  <h5 class="modal-title" id="BoxModalChgPwd__title">Change Password</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -39,7 +60,7 @@
                 <div class="modal-body">
                   <form>
                     <div class="form-group">
-                      <label for="InputNewPassword">Mon nouveau mot de passe</label>
+                      <label for="InputNewPassword">Entrez un nouveau password</label>
                       <input
                         type="password"
                         class="form-control"
@@ -49,10 +70,10 @@
                       <small
                         id="emailHelp"
                         class="form-text text-muted"
-                      >Au minimum 6 caractères dont une majuscule, un minuscule et un chiffre</small>
+                      >Au minimum 8 caractères dont une majuscule, un minuscule, un caractère numérique et un caractère spécial</small>
                     </div>
                     <div class="form-group">
-                      <label for="RepeatInputNewPassword">Je confirme mon nouveau mot de passe</label>
+                      <label for="RepeatInputNewPassword">Répétez votre nouveau password</label>
                       <input
                         type="password"
                         class="form-control"
@@ -64,15 +85,15 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                  <button type="button" class="btn btn-success" @click="changePassword">Sauvergarder les modifications</button>
+                  <button type="button" class="btn btn-primary" @click="changePassword">Sauvegarder les modifications</button>
                 </div>
                 <p id="retour-api" class="text-center">{{retourAPI}}</p>
               </div>
             </div>
           </div>
-          <!--END: Box Modal-->
+          <!--END: Box Modal pour changement PWD-->
         </div>
-        <button type="button" class="btn btn-danger white d-block mx-auto mt-5 mb-2" @click="deleteAccount">Supprimer mon compte ☠ </button>
+        <button type="button" class="btn btn-danger white d-block mx-auto mt-5 mb-2" @click="deleteAccount">Supprimer le compte</button>
       </div>
     </section>
   </main>
@@ -96,7 +117,6 @@ export default {
     ...mapState(["user"])
   },
   methods: {
-    //fonction pour supprimer le compte
     deleteAccount() {
       axios
         .delete("http://localhost:3000/api/user/delete", {
@@ -105,16 +125,11 @@ export default {
           }
         })
         .then(() => {
-         localStorage.clear();
-          setTimeout(() => {
-          this.$router.push({ path: '#/signup' })
-            }, 500);
-            window.location.reload();
-          })
-          
+          localStorage.clear();
+          location.replace(location.origin+'/#/signup');
+        })
         .catch(error => console.log(error));
     },
-    // fonction pour changer le mot de passe
     changePassword() {
       //Controle de la saisie du nouveau password
       //Controle de repeat et non null
@@ -150,13 +165,12 @@ export default {
           });
       } else {
         document.getElementById("retour-api").classList.add("text-danger");
-        this.retourAPI = "Les mots de passe ne sont pas identiques ou ne respectent pas les conditions requises";
+        this.retourAPI = "Veuillez vérifier la saisie des mots de passe";
       }
     },
-    // fonction pour tester les saisies de l'user dasn les inputs
     testInputs() {
-      //6 caractères dont au minimum une majuscule, une minuscule et un chiffre
-      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})/;
+      //8 caractères dont au minimum une majuscule, une minuscule, un caractère numérique et un caractère spécial
+      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/;
       let inputNewPwd = document.getElementById("InputNewPassword");
       let inputRepeatNewPwd = document.getElementById("RepeatInputNewPassword");
       inputNewPwd.addEventListener("input", function(e) {
@@ -180,7 +194,6 @@ export default {
       });
     }
   },
-  // modifications seront effectuées lorsque la requête sera faite
   mounted() {
     this.$store.dispatch("getUserInfos");
   }

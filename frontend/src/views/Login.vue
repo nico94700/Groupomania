@@ -1,72 +1,68 @@
 <template>
- <body class="body-intro">
-   
- 
-  <main class="main">
-    <form class="cadre w-50 m-auto">
-      <div class="container ">
-        <div class="form-group ">
-          <label for="inputemail ">📧 Votre e-mail</label>
-          <input type="text" class="form-control" id="inputemail" v-model="dataLogin.email" />
+  <main class="main main--connect">
+    <form class="w-75 align-items-center form-block d-flex m-auto shadow rounded">
+      <div
+        class="form-block--left d-flex flex-column justify-content-center block-demi-container p-3 text-right align-self-stretch"
+      >
+        <img class="logo align-self-end" src="../assets/icon.svg" alt="Logo Groupomania" />
+        <p>
+          <small>
+            Vous n'avez pas encore de compte,
+            <router-link class="redirection-singup" to="/signup">enregistrez-vous</router-link>
+          </small>
+        </p>
+      </div>
+      <div class="block-demi-container p-3">
+        <div class="form-group">
+          <label for="inputUsername">Username</label>
+          <input type="text" class="form-control" id="inputUsername" v-model="dataLogin.username" />
         </div>
-        <div class="form-group ">
-          <label for="inputPassword">🔒 Votre mot de passe</label>
-          <input  type="password" class="form-control" id="inputPassword" v-model="dataLogin.password" />
+        <div class="form-group">
+          <label for="inputPassword">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            v-model="dataLogin.password"
+          />
         </div>
-        <small> ◾ Vous n'avez pas encore de compte ? <router-link class="redirection-signup" to="/signup">Alors enregistrez-vous ‼</router-link> ◾ </small> <br>
-        <button @click.prevent="logIn" type="submit" class="btn btn-danger mb-3 mt-3">Se connecter 👋</button>
+        <button @click.prevent="logIn" type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
-    <modale v-bind:revele="revele" v-bind:toggleModale="toggleModale"></modale>
   </main>
-</body>
 </template>
 
 <script>
-//import de la bibliothèque et d'axios pour les requêtes
 import axios from "axios";
 import { mapState } from "vuex";
-// import du component Modale pour l'alerte du mot de passe ou email incorrect
-import modale from "../components/modale"
 export default {
   name: "SignUp",
   data() {
     return {
       dataLogin: {
-        email: null,
+        username: null,
         password: null
       },
-      msg: "",
-      revele: false
+      msg: ""
     };
-  },
-  components : {
-    'modale': modale
   },
   computed: {
     ...mapState(["user"])
   },
   methods: {
-    // fonction modale qui revele ou non la modale si il y a une erreur
-    toggleModale: function(){
-      this.revele = !this.revele
-    },
-    // requête pour connecter l'user déja existant
     logIn() {
       if (
-        this.dataLogin.email !== null || this.dataLogin.password !== null 
+        //TO DO : Vérifier par Regex
+        this.dataLogin.username !== null ||
+        this.dataLogin.password !== null
       ) {
         axios
           .post("http://localhost:3000/api/user/login", this.dataLogin)
           .then(response => {
             localStorage.setItem('token',response.data.token)
-            this.$router.push({ path: 'Wall' })
+            location.replace(location.origin)
           })
-          .catch(error => { 
-            console.log(error)
-            this.revele = !this.revele
-            })
-          
+          .catch(error => console.log(error));
       } else {
         console.log("oops !");
       }
@@ -74,7 +70,6 @@ export default {
   }
 };
 </script>
-
 
 <style lang="scss">
 </style>

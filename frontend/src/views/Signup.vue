@@ -1,32 +1,40 @@
 <template>
-<body class="body-intro">
-  <main class="main">
-    <form class="cadre w-50 m-auto">
-      <div class="container">
-        <div class="form-group ">
-          <label for="inputEmail">📧 Votre e-mail</label>
+  <main class="main main--connect">
+    <form class="w-75 align-items-center form-block d-flex m-auto shadow rounded">
+      <div
+        class="form-block--left d-flex flex-column justify-content-center block-demi-container p-3 text-right align-self-stretch"
+      >
+        <img class="logo align-self-end" src="../assets/icon.svg" alt="Logo Groupomania" />
+        <p>
+          <small>
+            Vous avez déjà un compte,
+            <router-link class="redirection-singup" to="/login">connecter-vous</router-link>
+          </small>
+        </p>
+      </div>
+      <div class="block-demi-container p-3">
+        <div class="form-group">
+          <label for="inputEmail">Email Groupomania</label>
           <input type="email" class="form-control" id="inputEmail" v-model="dataSignup.email" />
         </div>
         <div class="form-group">
-          <label for="inputUsername">👤 Votre nom d'utilisateur</label>
+          <label for="inputUsername">Username</label>
           <input type="text" class="form-control" id="inputUsername" v-model="dataSignup.username" />
         </div>
         <div class="form-group">
-          <label for="inputPassword">🔒 Votre mot de passe</label>
-          <input  type="password" class="form-control" id="inputPassword" v-model="dataSignup.password"/>
-          <small>Votre mot de passe doit contenir au moins 6 caractères dont 1 majuscule, 1 minuscule et un chiffre</small>
+          <label for="inputPassword">Password</label>
+          <input type="password" class="form-control" id="inputPassword" v-model="dataSignup.password"/>
         </div>
-        <button @click.prevent="sendSignup" type="submit" class="btn btn-danger mb-3 mt-3">Créer mon compte 👌</button>
+         <button @click.prevent="sendSignup" type="submit" class="btn btn-danger mb-3 mt-3">Créer mon compte 👌</button>
       </div>
     </form>
   </main>
-</body>
 </template>
 
 <script>
-//import de la bibliothèque et d'axios pour les requêtes
 import { mapState } from "vuex";
 import axios from "axios";
+
 export default {
   name: "SignUp",
   data() {
@@ -43,34 +51,33 @@ export default {
     ...mapState(["user"])
   },
   methods: {
-    // requête pour créer un user, sécurité grâce au regex
     sendSignup() {
-      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})/;
-      const regexEmail = /^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/;
-      const usernameRegex = /^[a-zA-Z ,.'-]+$/;
+      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/;
+      const regexEmail = /^[a-z0-9!#$ %& '*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&' * +/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/g;
+      const usernameRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
       if (
-        (this.dataSignup.email !== null || this.dataSignup.username !== null || this.dataSignup.password !== null) &&
+        (this.dataSignup.email !== null ||
+        this.dataSignup.username !== null ||
+        this.dataSignup.password !== null) &&
         (regexPassword.test(this.dataSignup.password) && regexEmail.test(this.dataSignup.email) && usernameRegex.test(this.dataSignup.username))
       ) {
         axios
           .post("http://localhost:3000/api/user/signup", this.dataSignup)
           .then(response => {
             console.log(response);
-            this.$router.push({ path: 'Wall' })
-            //Réinitialisation des champs après saisie
+            //Réinitialisation
             this.dataSignup.email = null;
             this.dataSignup.username = null;
             this.dataSignup.password = null;
           })
           .catch(error => console.log(error));
       } else {
-        alert("Désolé, vous n'avez pas rempli les champs correctement ! ");
+        alert("oops ! Un problème est survenue avec vos saisies");
       }
     }
   }
 };
 </script>
-
 
 <style lang="scss">
 </style>

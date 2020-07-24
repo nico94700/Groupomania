@@ -4,7 +4,7 @@
 let jwt = require('jsonwebtoken')
 
 module.exports = {
-  tokenSign : 'RANDOM_TOKEN_SECRET',
+  tokenSign : 'DEVELOPMENT_TOKEN_SECRET',
   generateToken: function (user) {
     return jwt.sign({
       userId: user.id,

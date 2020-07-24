@@ -1,14 +1,11 @@
+  
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Accueil',
-    component: () => import('../views/Accueil.vue')
-  },
+
   {
     path: '/signup',
     name: 'Signup',
@@ -19,16 +16,20 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
+
+   {
+  path: '/',
+  name: 'Wall',
+  component: () => import('../views/Wall.vue')
+},
+
   {
     path: '/user',
     name: 'User',
     component: () => import('../views/User.vue')
-  },
-  {
-    path: '/Wall',
-    name: 'Wall',
-    component: () => import('../views/Wall.vue')
   }
+  
+  
 ]
 
 const router = new VueRouter({

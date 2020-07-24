@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   },
     {});
   Post.associate = function (models) {
-  
+    // associations can be defined here
     models.Post.belongsTo(models.User, {
       foreignKey: {
         allowNull: false

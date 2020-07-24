@@ -170,4 +170,7 @@ export default {
 </script>
 
 <style>
+.id{
+  color: white;
+}
 </style>

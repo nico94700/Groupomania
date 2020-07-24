@@ -12,7 +12,7 @@ import CreatePost from "../components/CreatePost";
 import Post from "../components/Post";
 import modalBoxModerate from "../components/ModifPost";
 export default {
-  name: "Wall",
+  name: "Mur",
   components: {
     CreatePost,
     Post,
@@ -25,7 +25,12 @@ export default {
         content: "",
         image: ""
       },
+      //affichePsts: true,
+      //afficheFrm: false,
       allPosts: []
+      //allComments: [],
+      //postId: "",
+      //nbCom: []
     };
   },
   methods: {
@@ -48,10 +53,12 @@ export default {
       .catch(error => {
         console.log(error); //affiche pas le message 'normalement' envoyé par le back
       }),
+    
       this.$store.dispatch("getUserInfos");
   }
 };
 </script>
+
 <style lang="scss">
 .wall {
   background-color: white;

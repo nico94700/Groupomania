@@ -87,7 +87,7 @@ exports.delete = (req, res) => {
 
                         if (postFind.attachement) {
                             const filename = postFind.attachement.split('/images/')[1];
-                            console.log(filename);
+                            console.log("teseeeest", filename);
                             fs.unlink(`images/${filename}`, () => {
                                 models.Post
                                     .destroy({
