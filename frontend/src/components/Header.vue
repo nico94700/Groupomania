@@ -17,7 +17,7 @@
           <router-link class="nav-link" to="/login"><button type="button" class="btn btn-danger">Se connecter</button></router-link>
         </li>
         <li class="nav-item  " v-if="user.token !== null">
-          <router-link class="nav-link" to="/user"><button type="button" class="btn btn-secondary">{{ user.username }} 👤</button></router-link>
+          <router-link class="nav-link" to="/user"><button type="button" class="btn btn-secondary">~{{ user.username }}~ 👤</button></router-link>
         </li>
         <li class="nav-item mt-2" v-if="user.token !== null">
           <button type="button" class="btn btn-danger" @click="disconnect">Déconnexion 👋</button>
@@ -25,8 +25,6 @@
       </ul>
   </div>
 </nav>
-
-
 
 </template>
 
@@ -36,12 +34,17 @@ export default {
   computed: {
     ...mapState(["user"])
   },
-   methods: {
+  methods: {
     disconnect() {
+      // Pour se déconnecter, On vide le localStorage, on actualise la page et on redirige vers la page login
       localStorage.clear();
-      location.replace(location.origin);
+      setTimeout(() => {
+      this.$router.push({ path: '/login' })
+        window.location.reload();
+         }, 500);
+           
+          }
     }
-  }
 };
 </script>
 

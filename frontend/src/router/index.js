@@ -5,9 +5,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/wall',
-    name: 'Wall',
-    component: () => import('../views/Wall.vue')
+    path: '/',
+    name: 'Accueil',
+    component: () => import('../views/Accueil.vue')
   },
   {
     path: '/signup',
@@ -19,18 +19,16 @@ const routes = [
     name: 'Login',
     component: () => import('../views/Login.vue')
   },
-  
   {
     path: '/user',
     name: 'User',
     component: () => import('../views/User.vue')
   },
   {
-    path: '/',
-    name: 'Index',
-    component: () => import('../views/Login.vue')
-  },
-
+    path: '/Wall',
+    name: 'Wall',
+    component: () => import('../views/Wall.vue')
+  }
 ]
 
 const router = new VueRouter({

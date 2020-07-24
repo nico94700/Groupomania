@@ -23,7 +23,7 @@
           <div class="user-info__block">
             <p class="user-info__block__title title mb-0">Mot de passe</p>
             <small class="user-info__block__output">
-              Doit contenir au minimum 8 caractères dont une majuscule, une miniscule et un chiffre </small>
+              Doit contenir au minimum 6 caractères dont une majuscule, une miniscule et un chiffre </small>
           </div>
           <button type="button" class="btn btn-secondary mr-5" data-toggle="modal" data-target="#BoxModalChgPwd" @click="testInputs">Modifier mes informations ⚒</button>
           <!--Box Modal-->
@@ -49,7 +49,7 @@
                       <small
                         id="emailHelp"
                         class="form-text text-muted"
-                      >Au minimum 8 caractères dont une majuscule, un minuscule et un chiffre</small>
+                      >Au minimum 6 caractères dont une majuscule, un minuscule et un chiffre</small>
                     </div>
                     <div class="form-group">
                       <label for="RepeatInputNewPassword">Je confirme mon nouveau mot de passe</label>
@@ -156,7 +156,7 @@ export default {
     // fonction pour tester les saisies de l'user dasn les inputs
     testInputs() {
       //6 caractères dont au minimum une majuscule, une minuscule et un chiffre
-     const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/
+      const regexPassword = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})/;
       let inputNewPwd = document.getElementById("InputNewPassword");
       let inputRepeatNewPwd = document.getElementById("RepeatInputNewPassword");
       inputNewPwd.addEventListener("input", function(e) {

@@ -1,16 +1,12 @@
 //Import
 const express = require('express');
 const bodyParser = require('body-parser');
-const helmet = require("helmet"); // Plugin qui permet de protéger l'application de certaines vulnérabilités en configurant de manière appropriée des en-têtes HTTP.
-//protection contre les attaques de type cross-site scripting et autres injections intersites
-//Protection contre les attaques de sniffing et clickjacking
-
+const helmet = require('helmet'); /* Importation d'helmet, pour les failles xss  */
 
 const userRoutes = require('./routes/user.js');
 const postRoutes = require('./routes/post.js');
 
 const path = require('path');
-
 
 //création application Express
 const app = express();
@@ -23,11 +19,14 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
-app.use (helmet()); // L'application utilise toutes les protections helmet
+// Utilisation d'helmet
+app.use(helmet());
 
 //Parser les corps des requête + forcer parse d'objets inclus dans d'autres objets
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
 
 
 //Middleware

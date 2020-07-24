@@ -5,6 +5,7 @@ let models = require('../models');
 let utils = require('../utils/jwtUtils');
 let verifInput = require('../utils/verifInput')
 
+
 //Création d'un user
 exports.signup = (req, res) => {
     // Valider les paramètres de la requète
