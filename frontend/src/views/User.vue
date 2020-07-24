@@ -116,7 +116,8 @@ export default {
   computed: {
     ...mapState(["user"])
   },
-  methods: {
+    methods: {
+    //fonction pour supprimer le compte
     deleteAccount() {
       axios
         .delete("http://localhost:3000/api/user/delete", {
@@ -125,9 +126,13 @@ export default {
           }
         })
         .then(() => {
-          localStorage.clear();
-          location.replace(location.origin+'/#/signup');
-        })
+         localStorage.clear();
+         
+          
+        
+            window.location.reload();
+          })
+          
         .catch(error => console.log(error));
     },
     changePassword() {
