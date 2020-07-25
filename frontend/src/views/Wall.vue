@@ -63,6 +63,8 @@ export default {
 .wall {
   background-color: white;
   min-height: 100%;
+  margin: -4rem;
+  min-height: 105vh;
   
 }
 .block-post {
